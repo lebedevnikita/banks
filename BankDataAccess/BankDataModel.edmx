@@ -1,0 +1,613 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище BANKSModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "BANKS.dbo.t_application_F101_actives" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="t_application_F101_actives">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="label" Type="date" />
+          <Property Name="val" Type="bigint" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "BANKS.dbo.t_application_F101_actives_top_n" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="t_application_F101_actives_top_n">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dt" Type="date" />
+          <Property Name="val" Type="bigint" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="255" />
+          <Property Name="n" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "BANKS.dbo.t_application_F101_passives" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="t_application_F101_passives">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="label" Type="date" />
+          <Property Name="val" Type="bigint" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "BANKS.dbo.t_application_F101_passives_top_n" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="t_application_F101_passives_top_n">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dt" Type="date" />
+          <Property Name="val" Type="bigint" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="255" />
+          <Property Name="n" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "BANKS.dbo.t_BIC_CO" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="t_BIC_CO">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Bic" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DU" Type="nvarchar" MaxLength="20" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Bic" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="RegNum" Type="nvarchar" MaxLength="255" />
+          <Property Name="RegNum_date" Type="nvarchar" MaxLength="20" />
+          <Property Name="LOAD_DT" Type="datetime" />
+          <Property Name="IntCode" Type="int" />
+          <Property Name="RegNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="t_Form101Indicators">
+          <Key>
+            <PropertyRef Name="IndID" />
+          </Key>
+          <Property Name="IndID" Type="int" Nullable="false" />
+          <Property Name="IndCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="IndType" Type="int" />
+          <Property Name="IndChapter" Type="nvarchar" MaxLength="50" />
+          <Property Name="LOAD_DT" Type="datetime" />
+        </EntityType>
+        <Function Name="f_p_Data101FullV2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_p_Data101FullV2">
+          <Parameter Name="CredorgNumber" Type="int" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="f_p_Data101FullV2_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_p_Data101FullV2_">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="f_p_Data101FullV2_cursor_by_RegNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_p_Data101FullV2_cursor_by_RegNumber">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetHtml" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ResourceEncoding" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="BaseUrl" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Resource" Type="nvarchar(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Status" Type="nvarchar(max)" />
+                <Property Name="Content" Type="nvarchar(max)" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetSOAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ResourceEncoding" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="url" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ContentType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="method" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="soapEnvelope" Type="nvarchar(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Status" Type="nvarchar(max)" />
+                <Property Name="Content" Type="nvarchar(max)" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="p_application_bankinfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="shortname" Type="nvarchar" Mode="In" />
+          <Parameter Name="n" Type="int" Mode="In" />
+        </Function>
+        <Function Name="p_application_dataset_F101" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tip" Type="int" Mode="In" />
+          <Parameter Name="regn" Type="int" Mode="In" />
+          <Parameter Name="dt_from" Type="varchar" Mode="In" />
+          <Parameter Name="dt_to" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="p_application_dataset_F101_actives_top_n" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dt_slice" Type="date" Mode="In" />
+          <Parameter Name="dt_from" Type="date" Mode="In" />
+          <Parameter Name="top_n" Type="int" Mode="In" />
+        </Function>
+        <Function Name="p_application_dataset_F101_passives_top_n" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dt_slice" Type="date" Mode="In" />
+          <Parameter Name="dt_from" Type="date" Mode="In" />
+          <Parameter Name="top_n" Type="int" Mode="In" />
+        </Function>
+        <Function Name="p_application_datasets_static" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p_application_dates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="obj" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="p_BIC_CO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p_BicToIntCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p_BicToRegNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p_Data101" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IndCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="p_Data101_cursor_by_IndCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="p_Form101Indicators" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p_launcher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище BANKSModelContainer">
+          <EntitySet Name="t_Form101Indicators" EntityType="Self.t_Form101Indicators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_application_F101_actives" EntityType="Self.t_application_F101_actives" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_application_F101_actives].[id] AS [id], 
+    [t_application_F101_actives].[label] AS [label], 
+    [t_application_F101_actives].[val] AS [val]
+    FROM [dbo].[t_application_F101_actives] AS [t_application_F101_actives]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_application_F101_actives_top_n" EntityType="Self.t_application_F101_actives_top_n" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_application_F101_actives_top_n].[id] AS [id], 
+    [t_application_F101_actives_top_n].[dt] AS [dt], 
+    [t_application_F101_actives_top_n].[val] AS [val], 
+    [t_application_F101_actives_top_n].[ShortName] AS [ShortName], 
+    [t_application_F101_actives_top_n].[n] AS [n]
+    FROM [dbo].[t_application_F101_actives_top_n] AS [t_application_F101_actives_top_n]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_application_F101_passives" EntityType="Self.t_application_F101_passives" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_application_F101_passives].[id] AS [id], 
+    [t_application_F101_passives].[label] AS [label], 
+    [t_application_F101_passives].[val] AS [val]
+    FROM [dbo].[t_application_F101_passives] AS [t_application_F101_passives]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_application_F101_passives_top_n" EntityType="Self.t_application_F101_passives_top_n" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_application_F101_passives_top_n].[id] AS [id], 
+    [t_application_F101_passives_top_n].[dt] AS [dt], 
+    [t_application_F101_passives_top_n].[val] AS [val], 
+    [t_application_F101_passives_top_n].[ShortName] AS [ShortName], 
+    [t_application_F101_passives_top_n].[n] AS [n]
+    FROM [dbo].[t_application_F101_passives_top_n] AS [t_application_F101_passives_top_n]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_BIC_CO" EntityType="Self.t_BIC_CO" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_BIC_CO].[ID] AS [ID], 
+    [t_BIC_CO].[DU] AS [DU], 
+    [t_BIC_CO].[ShortName] AS [ShortName], 
+    [t_BIC_CO].[Bic] AS [Bic], 
+    [t_BIC_CO].[RegNum] AS [RegNum], 
+    [t_BIC_CO].[RegNum_date] AS [RegNum_date], 
+    [t_BIC_CO].[LOAD_DT] AS [LOAD_DT], 
+    [t_BIC_CO].[IntCode] AS [IntCode], 
+    [t_BIC_CO].[RegNumber] AS [RegNumber]
+    FROM [dbo].[t_BIC_CO] AS [t_BIC_CO]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BANKSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BANKSEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="t_Form101Indicators" EntityType="BANKSModel.t_Form101Indicators" />
+          <EntitySet Name="t_BIC_CO" EntityType="BANKSModel.t_BIC_CO" />
+          <FunctionImport Name="f_Form101Indicators_IndCode" IsComposable="true" ReturnType="Collection(BANKSModel.f_Form101Indicators_IndCode_Result)">
+            <Parameter Name="IndCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f_p_Data101FullV2">
+            <Parameter Name="CredorgNumber" Mode="In" Type="Int32" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="f_p_Data101FullV2_">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="f_p_Data101FullV2_cursor_by_RegNumber">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetHtml" IsComposable="true" ReturnType="Collection(BANKSModel.GetHtml_Result)">
+            <Parameter Name="ResourceEncoding" Mode="In" Type="String" />
+            <Parameter Name="BaseUrl" Mode="In" Type="String" />
+            <Parameter Name="Resource" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSOAP" IsComposable="true" ReturnType="Collection(BANKSModel.GetSOAP_Result)">
+            <Parameter Name="ResourceEncoding" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="ContentType" Mode="In" Type="String" />
+            <Parameter Name="method" Mode="In" Type="String" />
+            <Parameter Name="soapEnvelope" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="p_BIC_CO" />
+          <FunctionImport Name="p_BicToIntCode" />
+          <FunctionImport Name="p_BicToRegNumber" />
+          <FunctionImport Name="p_Data101">
+            <Parameter Name="IndCode" Mode="In" Type="String" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="p_Data101_cursor_by_IndCode">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="p_Form101Indicators" />
+          <FunctionImport Name="p_launcher" />
+          <EntitySet Name="t_application_F101_actives" EntityType="BANKSModel.t_application_F101_actives" />
+          <EntitySet Name="t_application_F101_passives" EntityType="BANKSModel.t_application_F101_passives" />
+          <FunctionImport Name="f_application_F101_actives_top_n" IsComposable="true" ReturnType="Collection(BANKSModel.f_application_F101_actives_top_n_Result)">
+            <Parameter Name="dt_slice" Mode="In" Type="DateTime" />
+            <Parameter Name="dt_from" Mode="In" Type="DateTime" />
+            <Parameter Name="top_n" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_application_datasets" />
+          <EntitySet Name="t_application_F101_actives_top_n" EntityType="BANKSModel.t_application_F101_actives_top_n" />
+          <EntitySet Name="t_application_F101_passives_top_n" EntityType="BANKSModel.t_application_F101_passives_top_n" />
+          <FunctionImport Name="p1" ReturnType="Collection(BANKSModel.p1_Result)">
+            <Parameter Name="dt_slice" Mode="In" Type="DateTime" />
+            <Parameter Name="dt_from" Mode="In" Type="DateTime" />
+            <Parameter Name="top_n" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_application_dataset_F101_actives_top_n" ReturnType="Collection(BANKSModel.p_application_dataset_F101_actives_top_n_Result)">
+            <Parameter Name="dt_slice" Mode="In" Type="DateTime" />
+            <Parameter Name="dt_from" Mode="In" Type="DateTime" />
+            <Parameter Name="top_n" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_application_datasets_static" />
+          <FunctionImport Name="p_application_dataset_F101_passives_top_n" ReturnType="Collection(BANKSModel.p_application_dataset_F101_passives_top_n_Result)">
+            <Parameter Name="dt_slice" Mode="In" Type="DateTime" />
+            <Parameter Name="dt_from" Mode="In" Type="DateTime" />
+            <Parameter Name="top_n" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_application_dataset_F101" ReturnType="Collection(BANKSModel.p_application_dataset_F101_Result)">
+            <Parameter Name="tip" Mode="In" Type="Int32" />
+            <Parameter Name="regn" Mode="In" Type="Int32" />
+            <Parameter Name="dt_from" Mode="In" Type="String" />
+            <Parameter Name="dt_to" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="p_application_bankinfo" ReturnType="Collection(BANKSModel.p_application_bankinfo_Result)">
+            <Parameter Name="MODE" Mode="In" Type="String" />
+            <Parameter Name="shortname" Mode="In" Type="String" />
+            <Parameter Name="n" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_application_dates" ReturnType="Collection(BANKSModel.p_application_dates_Result)">
+          <Parameter Name="obj" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="t_Form101Indicators">
+          <Key>
+            <PropertyRef Name="IndID" />
+          </Key>
+          <Property Name="IndID" Type="Int32" Nullable="false" />
+          <Property Name="IndCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IndType" Type="Int32" />
+          <Property Name="IndChapter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LOAD_DT" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_BIC_CO">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Bic" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DU" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Bic" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RegNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RegNum_date" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LOAD_DT" Type="DateTime" Precision="3" />
+          <Property Name="IntCode" Type="Int32" />
+          <Property Name="RegNumber" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="f_Form101Indicators_IndCode_Result">
+          <Property Type="Int32" Name="IndID" Nullable="false" />
+          <Property Type="String" Name="IndCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="IndType" Nullable="true" />
+          <Property Type="String" Name="IndChapter" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LOAD_DT" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetHtml_Result">
+          <Property Type="String" Name="Status" Nullable="true" />
+          <Property Type="String" Name="Content" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSOAP_Result">
+          <Property Type="String" Name="Status" Nullable="true" />
+          <Property Type="String" Name="Content" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="t_application_F101_actives">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="label" Type="DateTime" Precision="0" />
+          <Property Name="val" Type="Int64" />
+        </EntityType>
+        <EntityType Name="t_application_F101_passives">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="label" Type="DateTime" Precision="0" />
+          <Property Name="val" Type="Int64" />
+        </EntityType>
+        <ComplexType Name="f_application_F101_actives_top_n_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="dt" Nullable="true" Precision="10" />
+          <Property Type="Int64" Name="val" Nullable="true" />
+          <Property Type="String" Name="ShortName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="n" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="t_application_F101_actives_top_n">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dt" Type="DateTime" Precision="0" />
+          <Property Name="val" Type="Int64" />
+          <Property Name="ShortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="n" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_application_F101_passives_top_n">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dt" Type="DateTime" Precision="0" />
+          <Property Name="val" Type="Int64" />
+          <Property Name="ShortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="n" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="p1_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="dt" Nullable="true" />
+          <Property Type="Int64" Name="val" Nullable="true" />
+          <Property Type="String" Name="ShortName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="n" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="p_application_dataset_F101_actives_top_n_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="dt" Nullable="true" />
+          <Property Type="Int64" Name="val" Nullable="true" />
+          <Property Type="String" Name="ShortName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="n" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="p_application_dataset_F101_passives_top_n_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="dt" Nullable="true" />
+          <Property Type="Int64" Name="val" Nullable="true" />
+          <Property Type="String" Name="ShortName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="n" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="p_application_dataset_F101_Result">
+          <Property Type="Int32" Name="regn" Nullable="false" />
+          <Property Type="DateTime" Name="dt" Nullable="true" Precision="23" />
+          <Property Type="String" Name="pln" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="ap" Nullable="true" />
+          <Property Type="String" Name="IndCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="col_1" Nullable="true" />
+          <Property Type="Int64" Name="col_2" Nullable="true" />
+          <Property Type="Int64" Name="col_3" Nullable="true" />
+          <Property Type="Int32" Name="tip" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="p_application_bankinfo_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="DU" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ShortName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Bic" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="RegNum" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="RegNum_date" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="LOAD_DT" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="IntCode" Nullable="true" />
+          <Property Type="Int32" Name="RegNumber" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="p_application_dates_Result">
+          <Property Type="String" Name="obj" Nullable="true" MaxLength="55" />
+          <Property Type="DateTime" Name="dt" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BANKSModelContainer" CdmEntityContainer="BANKSEntities" >
+          <EntitySetMapping Name="t_Form101Indicators">
+            <EntityTypeMapping TypeName="BANKSModel.t_Form101Indicators">
+              <MappingFragment StoreEntitySet="t_Form101Indicators">
+                <ScalarProperty Name="LOAD_DT" ColumnName="LOAD_DT" />
+                <ScalarProperty Name="IndChapter" ColumnName="IndChapter" />
+                <ScalarProperty Name="IndType" ColumnName="IndType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IndCode" ColumnName="IndCode" />
+                <ScalarProperty Name="IndID" ColumnName="IndID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_BIC_CO">
+            <EntityTypeMapping TypeName="BANKSModel.t_BIC_CO">
+              <MappingFragment StoreEntitySet="t_BIC_CO">
+                <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
+                <ScalarProperty Name="IntCode" ColumnName="IntCode" />
+                <ScalarProperty Name="LOAD_DT" ColumnName="LOAD_DT" />
+                <ScalarProperty Name="RegNum_date" ColumnName="RegNum_date" />
+                <ScalarProperty Name="RegNum" ColumnName="RegNum" />
+                <ScalarProperty Name="Bic" ColumnName="Bic" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="DU" ColumnName="DU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="f_p_Data101FullV2" FunctionName="Хранилище BANKSModel.f_p_Data101FullV2" />
+          <FunctionImportMapping FunctionImportName="f_p_Data101FullV2_" FunctionName="Хранилище BANKSModel.f_p_Data101FullV2_" />
+          <FunctionImportMapping FunctionImportName="f_p_Data101FullV2_cursor_by_RegNumber" FunctionName="Хранилище BANKSModel.f_p_Data101FullV2_cursor_by_RegNumber" />
+          <FunctionImportMapping FunctionImportName="GetHtml" FunctionName="Хранилище BANKSModel.GetHtml">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BANKSModel.GetHtml_Result">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSOAP" FunctionName="Хранилище BANKSModel.GetSOAP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BANKSModel.GetSOAP_Result">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_BIC_CO" FunctionName="Хранилище BANKSModel.p_BIC_CO" />
+          <FunctionImportMapping FunctionImportName="p_BicToIntCode" FunctionName="Хранилище BANKSModel.p_BicToIntCode" />
+          <FunctionImportMapping FunctionImportName="p_BicToRegNumber" FunctionName="Хранилище BANKSModel.p_BicToRegNumber" />
+          <FunctionImportMapping FunctionImportName="p_Data101" FunctionName="Хранилище BANKSModel.p_Data101" />
+          <FunctionImportMapping FunctionImportName="p_Data101_cursor_by_IndCode" FunctionName="Хранилище BANKSModel.p_Data101_cursor_by_IndCode" />
+          <FunctionImportMapping FunctionImportName="p_Form101Indicators" FunctionName="Хранилище BANKSModel.p_Form101Indicators" />
+          <FunctionImportMapping FunctionImportName="p_launcher" FunctionName="Хранилище BANKSModel.p_launcher" />
+          <EntitySetMapping Name="t_application_F101_actives">
+            <EntityTypeMapping TypeName="BANKSModel.t_application_F101_actives">
+              <MappingFragment StoreEntitySet="t_application_F101_actives">
+                <ScalarProperty Name="val" ColumnName="val" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_application_F101_passives">
+            <EntityTypeMapping TypeName="BANKSModel.t_application_F101_passives">
+              <MappingFragment StoreEntitySet="t_application_F101_passives">
+                <ScalarProperty Name="val" ColumnName="val" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_application_F101_actives_top_n">
+            <EntityTypeMapping TypeName="BANKSModel.t_application_F101_actives_top_n">
+              <MappingFragment StoreEntitySet="t_application_F101_actives_top_n">
+                <ScalarProperty Name="n" ColumnName="n" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="val" ColumnName="val" />
+                <ScalarProperty Name="dt" ColumnName="dt" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_application_F101_passives_top_n">
+            <EntityTypeMapping TypeName="BANKSModel.t_application_F101_passives_top_n">
+              <MappingFragment StoreEntitySet="t_application_F101_passives_top_n">
+                <ScalarProperty Name="n" ColumnName="n" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="val" ColumnName="val" />
+                <ScalarProperty Name="dt" ColumnName="dt" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="p_application_dataset_F101_actives_top_n" FunctionName="Хранилище BANKSModel.p_application_dataset_F101_actives_top_n">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BANKSModel.p_application_dataset_F101_actives_top_n_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dt" ColumnName="dt" />
+                <ScalarProperty Name="val" ColumnName="val" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="n" ColumnName="n" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_application_datasets_static" FunctionName="Хранилище BANKSModel.p_application_datasets_static" />
+          <FunctionImportMapping FunctionImportName="p_application_dataset_F101_passives_top_n" FunctionName="Хранилище BANKSModel.p_application_dataset_F101_passives_top_n">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BANKSModel.p_application_dataset_F101_passives_top_n_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dt" ColumnName="dt" />
+                <ScalarProperty Name="val" ColumnName="val" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="n" ColumnName="n" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_application_dataset_F101" FunctionName="Хранилище BANKSModel.p_application_dataset_F101">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BANKSModel.p_application_dataset_F101_Result">
+                <ScalarProperty Name="regn" ColumnName="regn" />
+                <ScalarProperty Name="dt" ColumnName="dt" />
+                <ScalarProperty Name="pln" ColumnName="pln" />
+                <ScalarProperty Name="ap" ColumnName="ap" />
+                <ScalarProperty Name="IndCode" ColumnName="IndCode" />
+                <ScalarProperty Name="col_1" ColumnName="col_1" />
+                <ScalarProperty Name="col_2" ColumnName="col_2" />
+                <ScalarProperty Name="col_3" ColumnName="col_3" />
+                <ScalarProperty Name="tip" ColumnName="tip" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_application_bankinfo" FunctionName="Хранилище BANKSModel.p_application_bankinfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BANKSModel.p_application_bankinfo_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DU" ColumnName="DU" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Bic" ColumnName="Bic" />
+                <ScalarProperty Name="RegNum" ColumnName="RegNum" />
+                <ScalarProperty Name="RegNum_date" ColumnName="RegNum_date" />
+                <ScalarProperty Name="LOAD_DT" ColumnName="LOAD_DT" />
+                <ScalarProperty Name="IntCode" ColumnName="IntCode" />
+                <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_application_dates" FunctionName="Хранилище BANKSModel.p_application_dates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BANKSModel.p_application_dates_Result">
+                <ScalarProperty Name="obj" ColumnName="obj" />
+                <ScalarProperty Name="dt" ColumnName="dt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

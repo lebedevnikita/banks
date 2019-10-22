@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="74cd99d9449c4f968cb81f0959be93ba" Name="Diagram1" ZoomLevel="85" >
+        <EntityTypeShape EntityType="BANKSModel.t_Form101Indicators" Width="1.5" PointX="0.5" PointY="2" />
+        <EntityTypeShape EntityType="BANKSModel.t_BIC_CO" Width="1.5" PointX="3.5" PointY="2.25" />
+        <EntityTypeShape EntityType="BANKSModel.t_application_F101_actives" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BANKSModel.t_application_F101_passives" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BANKSModel.t_application_F101_actives_top_n" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="BANKSModel.t_application_F101_passives_top_n" Width="1.5" PointX="6.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
