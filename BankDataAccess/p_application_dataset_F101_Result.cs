@@ -13,7 +13,7 @@ namespace BankDataAccess
     
     public partial class p_application_dataset_F101_Result
     {
-        public int regn { get; set; }
+        public string regn { get; set; }
         public Nullable<System.DateTime> dt { get; set; }
         public string pln { get; set; }
         public Nullable<long> ap { get; set; }
