@@ -157,7 +157,7 @@ namespace WebApplication2.Controllers
             public Nullable<long> ap { get; set; }
             public int tip { get; set; }
             public string IndCode { get; set; }
-            public string regn { get; set; }
+            public int regn { get; set; }
             public Nullable<long> col_1 { get; set; }
             public Nullable<long> col_2 { get; set; }
             public Nullable<long> col_3 { get; set; }
