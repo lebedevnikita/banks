@@ -33,6 +33,7 @@ namespace BankDataAccess
         public virtual DbSet<t_application_F101_passives> t_application_F101_passives { get; set; }
         public virtual DbSet<t_application_F101_actives_top_n> t_application_F101_actives_top_n { get; set; }
         public virtual DbSet<t_application_F101_passives_top_n> t_application_F101_passives_top_n { get; set; }
+        public virtual DbSet<t_Form102Indicators_flat> t_Form102Indicators_flat { get; set; }
     
         [DbFunction("BANKSEntities", "f_Form101Indicators_IndCode")]
         public virtual IQueryable<f_Form101Indicators_IndCode_Result> f_Form101Indicators_IndCode(string indCode)
@@ -265,15 +266,19 @@ namespace BankDataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<p_application_dataset_F101_passives_top_n_Result>("p_application_dataset_F101_passives_top_n", dt_sliceParameter, dt_fromParameter, top_nParameter);
         }
     
-        public virtual ObjectResult<p_application_dataset_F101_Result> p_application_dataset_F101(Nullable<int> tip, Nullable<int> regn, string dt_from, string dt_to)
+        public virtual ObjectResult<p_application_dataset_F101_Result> p_application_dataset_F101(string mODE, Nullable<int> tip, string str, string dt_from, string dt_to)
         {
+            var mODEParameter = mODE != null ?
+                new ObjectParameter("MODE", mODE) :
+                new ObjectParameter("MODE", typeof(string));
+    
             var tipParameter = tip.HasValue ?
                 new ObjectParameter("tip", tip) :
                 new ObjectParameter("tip", typeof(int));
     
-            var regnParameter = regn.HasValue ?
-                new ObjectParameter("regn", regn) :
-                new ObjectParameter("regn", typeof(int));
+            var strParameter = str != null ?
+                new ObjectParameter("str", str) :
+                new ObjectParameter("str", typeof(string));
     
             var dt_fromParameter = dt_from != null ?
                 new ObjectParameter("dt_from", dt_from) :
@@ -283,7 +288,7 @@ namespace BankDataAccess
                 new ObjectParameter("dt_to", dt_to) :
                 new ObjectParameter("dt_to", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<p_application_dataset_F101_Result>("p_application_dataset_F101", tipParameter, regnParameter, dt_fromParameter, dt_toParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<p_application_dataset_F101_Result>("p_application_dataset_F101", mODEParameter, tipParameter, strParameter, dt_fromParameter, dt_toParameter);
         }
     
         public virtual ObjectResult<p_application_bankinfo_Result> p_application_bankinfo(string mODE, string shortname, Nullable<int> n)
@@ -310,6 +315,31 @@ namespace BankDataAccess
                 new ObjectParameter("obj", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<p_application_dates_Result>("p_application_dates", objParameter);
+        }
+    
+        public virtual ObjectResult<p_application_dataset_F102_Result> p_application_dataset_F102(string slice, Nullable<int> field_id, string regn, string dt_from, string dt_to)
+        {
+            var sliceParameter = slice != null ?
+                new ObjectParameter("slice", slice) :
+                new ObjectParameter("slice", typeof(string));
+    
+            var field_idParameter = field_id.HasValue ?
+                new ObjectParameter("Field_id", field_id) :
+                new ObjectParameter("Field_id", typeof(int));
+    
+            var regnParameter = regn != null ?
+                new ObjectParameter("regn", regn) :
+                new ObjectParameter("regn", typeof(string));
+    
+            var dt_fromParameter = dt_from != null ?
+                new ObjectParameter("dt_from", dt_from) :
+                new ObjectParameter("dt_from", typeof(string));
+    
+            var dt_toParameter = dt_to != null ?
+                new ObjectParameter("dt_to", dt_to) :
+                new ObjectParameter("dt_to", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<p_application_dataset_F102_Result>("p_application_dataset_F102", sliceParameter, field_idParameter, regnParameter, dt_fromParameter, dt_toParameter);
         }
     }
 }

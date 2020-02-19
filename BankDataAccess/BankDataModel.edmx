@@ -56,7 +56,7 @@
             <PropertyRef Name="ID" />
             <PropertyRef Name="Bic" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DU" Type="nvarchar" MaxLength="20" />
           <Property Name="ShortName" Type="nvarchar" MaxLength="255" />
           <Property Name="Bic" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -76,6 +76,26 @@
           <Property Name="IndType" Type="int" />
           <Property Name="IndChapter" Type="nvarchar" MaxLength="50" />
           <Property Name="LOAD_DT" Type="datetime" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "BANKS.dbo.t_Form102Indicators_flat" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="t_Form102Indicators_flat">
+          <Key>
+            <PropertyRef Name="symbol" />
+          </Key>
+          <Property Name="symid" Type="int" />
+          <Property Name="symsort" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="250" />
+          <Property Name="symbol" Type="int" Nullable="false" />
+          <Property Name="symtype" Type="int" />
+          <Property Name="symset" Type="int" />
+          <Property Name="LOAD_DT" Type="datetime" />
+          <Property Name="Part_name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Section_name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Article_name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Part_id" Type="int" />
+          <Property Name="Section_id" Type="int" />
+          <Property Name="Article_id" Type="int" />
         </EntityType>
         <Function Name="f_p_Data101FullV2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_p_Data101FullV2">
           <Parameter Name="CredorgNumber" Type="int" Mode="In" />
@@ -124,10 +144,11 @@
           <Parameter Name="n" Type="int" Mode="In" />
         </Function>
         <Function Name="p_application_dataset_F101" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MODE" Type="nvarchar" Mode="In" />
           <Parameter Name="tip" Type="int" Mode="In" />
-          <Parameter Name="regn" Type="int" Mode="In" />
-          <Parameter Name="dt_from" Type="varchar" Mode="In" />
-          <Parameter Name="dt_to" Type="varchar" Mode="In" />
+          <Parameter Name="str" Type="nvarchar" Mode="In" />
+          <Parameter Name="dt_from" Type="nvarchar" Mode="In" />
+          <Parameter Name="dt_to" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="p_application_dataset_F101_actives_top_n" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="dt_slice" Type="date" Mode="In" />
@@ -138,6 +159,13 @@
           <Parameter Name="dt_slice" Type="date" Mode="In" />
           <Parameter Name="dt_from" Type="date" Mode="In" />
           <Parameter Name="top_n" Type="int" Mode="In" />
+        </Function>
+        <Function Name="p_application_dataset_F102" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="slice" Type="nvarchar" Mode="In" />
+          <Parameter Name="Field_id" Type="int" Mode="In" />
+          <Parameter Name="regn" Type="nvarchar" Mode="In" />
+          <Parameter Name="dt_from" Type="nvarchar" Mode="In" />
+          <Parameter Name="dt_to" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="p_application_datasets_static" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="p_application_dates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -203,6 +231,23 @@
     [t_BIC_CO].[IntCode] AS [IntCode], 
     [t_BIC_CO].[RegNumber] AS [RegNumber]
     FROM [dbo].[t_BIC_CO] AS [t_BIC_CO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_Form102Indicators_flat" EntityType="Self.t_Form102Indicators_flat" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [t_Form102Indicators_flat].[symid] AS [symid], 
+    [t_Form102Indicators_flat].[symsort] AS [symsort], 
+    [t_Form102Indicators_flat].[name] AS [name], 
+    [t_Form102Indicators_flat].[symbol] AS [symbol], 
+    [t_Form102Indicators_flat].[symtype] AS [symtype], 
+    [t_Form102Indicators_flat].[symset] AS [symset], 
+    [t_Form102Indicators_flat].[LOAD_DT] AS [LOAD_DT], 
+    [t_Form102Indicators_flat].[Part_name] AS [Part_name], 
+    [t_Form102Indicators_flat].[Section_name] AS [Section_name], 
+    [t_Form102Indicators_flat].[Article_name] AS [Article_name], 
+    [t_Form102Indicators_flat].[Part_id] AS [Part_id], 
+    [t_Form102Indicators_flat].[Section_id] AS [Section_id], 
+    [t_Form102Indicators_flat].[Article_id] AS [Article_id]
+    FROM [dbo].[t_Form102Indicators_flat] AS [t_Form102Indicators_flat]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -281,8 +326,9 @@
             <Parameter Name="top_n" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="p_application_dataset_F101" ReturnType="Collection(BANKSModel.p_application_dataset_F101_Result)">
+            <Parameter Name="MODE" Mode="In" Type="String" />
             <Parameter Name="tip" Mode="In" Type="Int32" />
-            <Parameter Name="regn" Mode="In" Type="Int32" />
+            <Parameter Name="str" Mode="In" Type="String" />
             <Parameter Name="dt_from" Mode="In" Type="String" />
             <Parameter Name="dt_to" Mode="In" Type="String" />
           </FunctionImport>
@@ -293,6 +339,14 @@
           </FunctionImport>
           <FunctionImport Name="p_application_dates" ReturnType="Collection(BANKSModel.p_application_dates_Result)">
           <Parameter Name="obj" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="t_Form102Indicators_flat" EntityType="BANKSModel.t_Form102Indicators_flat" />
+          <FunctionImport Name="p_application_dataset_F102" ReturnType="Collection(BANKSModel.p_application_dataset_F102_Result)">
+            <Parameter Name="slice" Mode="In" Type="String" />
+            <Parameter Name="Field_id" Mode="In" Type="Int32" />
+            <Parameter Name="regn" Mode="In" Type="String" />
+            <Parameter Name="dt_from" Mode="In" Type="String" />
+            <Parameter Name="dt_to" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="t_Form101Indicators">
@@ -426,6 +480,34 @@
         <ComplexType Name="p_application_dates_Result">
           <Property Type="String" Name="obj" Nullable="true" MaxLength="55" />
           <Property Type="DateTime" Name="dt" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="t_Form102Indicators_flat">
+          <Key>
+            <PropertyRef Name="symbol" />
+          </Key>
+          <Property Name="symid" Type="Int32" />
+          <Property Name="symsort" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="symbol" Type="Int32" Nullable="false" />
+          <Property Name="symtype" Type="Int32" />
+          <Property Name="symset" Type="Int32" />
+          <Property Name="LOAD_DT" Type="DateTime" Precision="3" />
+          <Property Name="Part" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Section" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Article" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Part_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Section_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Article_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Part_id" Type="Int32" />
+          <Property Name="Section_id" Type="Int32" />
+          <Property Name="Article_id" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="p_application_dataset_F102_Result">
+          <Property Type="Int32" Name="regn" Nullable="true" />
+          <Property Type="DateTime" Name="dt" Nullable="true" />
+          <Property Type="String" Name="FieldName" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="Field_id" Nullable="true" />
+          <Property Type="Decimal" Name="val" Nullable="true" Precision="27" Scale="4" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -584,6 +666,36 @@
               <ComplexTypeMapping TypeName="BANKSModel.p_application_dates_Result">
                 <ScalarProperty Name="obj" ColumnName="obj" />
                 <ScalarProperty Name="dt" ColumnName="dt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="t_Form102Indicators_flat">
+            <EntityTypeMapping TypeName="BANKSModel.t_Form102Indicators_flat">
+              <MappingFragment StoreEntitySet="t_Form102Indicators_flat">
+                <ScalarProperty Name="Article_id" ColumnName="Article_id" />
+                <ScalarProperty Name="Section_id" ColumnName="Section_id" />
+                <ScalarProperty Name="Part_id" ColumnName="Part_id" />
+                <ScalarProperty Name="Article_name" ColumnName="Article_name" />
+                <ScalarProperty Name="Section_name" ColumnName="Section_name" />
+                <ScalarProperty Name="Part_name" ColumnName="Part_name" />
+                <ScalarProperty Name="LOAD_DT" ColumnName="LOAD_DT" />
+                <ScalarProperty Name="symset" ColumnName="symset" />
+                <ScalarProperty Name="symtype" ColumnName="symtype" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="symsort" ColumnName="symsort" />
+                <ScalarProperty Name="symid" ColumnName="symid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="p_application_dataset_F102" FunctionName="Хранилище BANKSModel.p_application_dataset_F102">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BANKSModel.p_application_dataset_F102_Result">
+                <ScalarProperty Name="regn" ColumnName="regn" />
+                <ScalarProperty Name="dt" ColumnName="dt" />
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="Field_id" ColumnName="Field_id" />
+                <ScalarProperty Name="val" ColumnName="val" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

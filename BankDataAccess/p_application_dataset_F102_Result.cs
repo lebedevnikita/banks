@@ -11,9 +11,12 @@ namespace BankDataAccess
 {
     using System;
     
-    public partial class p_application_dates_Result
+    public partial class p_application_dataset_F102_Result
     {
-        public string obj { get; set; }
+        public Nullable<int> regn { get; set; }
         public Nullable<System.DateTime> dt { get; set; }
+        public string FieldName { get; set; }
+        public Nullable<int> Field_id { get; set; }
+        public Nullable<decimal> val { get; set; }
     }
 }

@@ -100,6 +100,9 @@
     <Compile Include="p_application_dataset_F101_Result.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="p_application_dataset_F102_Result.cs">
+      <DependentUpon>BankDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="p_application_dates_Result.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
@@ -119,6 +122,9 @@
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="t_Form101Indicators.cs">
+      <DependentUpon>BankDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Form102Indicators_flat.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

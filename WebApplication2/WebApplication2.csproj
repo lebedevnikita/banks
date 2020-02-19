@@ -171,6 +171,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BanksController.cs" />
+    <Compile Include="Controllers\F102Controller.cs" />
     <Compile Include="Controllers\F101Controller.cs" />
     <Compile Include="Controllers\Form101IndicatorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

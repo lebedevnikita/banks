@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="BANKSModel.t_application_F101_passives" Width="1.5" PointX="2.75" PointY="5.75" />
         <EntityTypeShape EntityType="BANKSModel.t_application_F101_actives_top_n" Width="1.5" PointX="5.375" PointY="5.75" />
         <EntityTypeShape EntityType="BANKSModel.t_application_F101_passives_top_n" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BANKSModel.t_Form102Indicators_flat" Width="1.5" PointX="8" PointY="3.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
